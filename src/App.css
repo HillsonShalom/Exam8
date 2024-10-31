@@ -12,6 +12,7 @@
   align-content: center;
   background-color: green;
   padding: 10px;
+  border-radius: 10px;
 }
 
 .form > *{
@@ -26,9 +27,9 @@
   margin: auto;
 }
 
-.form-input{
-  
-}
-.form-select{
-
+.card{
+  margin: 20px;
+  position: relative;
+  border-radius: 5px;
+  background-color:brown;
 }

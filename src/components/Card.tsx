@@ -1,6 +1,16 @@
 import apiContext from "../service/apiContext";
 import { Mission } from "../types/MissionModel";
 
+
+
+function colors(x: 'Pending' | 'In Progress' | 'Completed') {
+    if (x === 'Pending') return 'brown';
+    if (x === 'In Progress') return 'darkgoldenrod' 
+    else {
+        return 'green'
+    }
+}
+
 interface Props {
   mission: Mission;
   set: (x: () => Promise<Mission>) => void;
@@ -23,7 +33,7 @@ const Card = ({ mission, set, del }: Props) => {
     })
   };
   return (
-    <div>
+    <div className="card" style={{backgroundColor: colors(mission.status)}}>
       <h3>{mission.name}</h3>
       <p>{mission.status}</p>
       <p>{mission.priority}</p>
