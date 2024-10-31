@@ -2,6 +2,8 @@
   background-color: antiquewhite;
   width: 70%;
   margin: auto;
+  padding-top: 30px;
+  height: 100%;
 }
 
 .header{
@@ -13,6 +15,7 @@
   background-color: green;
   padding: 10px;
   border-radius: 10px;
+  margin: 20px;
 }
 
 .form > *{
