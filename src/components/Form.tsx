@@ -1,12 +1,19 @@
 import { FormEvent, useState } from "react";
 import { CreateMissionDto } from "../types/createMissionDto";
 import apiContext from "../service/apiContext";
+import { Mission } from "../types/MissionModel";
 
-const submit = async (e: FormEvent, dto: CreateMissionDto) => {
+interface Props {
+    missions: Mission[]
+    setMissions: (x: Mission[]) => void
+}
+
+const submit = async (e: FormEvent, dto: CreateMissionDto, props: Props
+) => {
   e.preventDefault();
   try {
     const res = await apiContext.createMission(dto);
-    console.log(res);
+    props.setMissions([...props.missions, res])
   } catch (err) {
     const error = err as Error;
     console.log(error.message);
@@ -14,7 +21,7 @@ const submit = async (e: FormEvent, dto: CreateMissionDto) => {
   }
 };
 
-const Form = () => {
+const Form = (ps: Props) => {
   const [name, setName] = useState("");
   const [status, setStatus] = useState<"Pending" | "In Progress" | "Completed">(
     "Pending"
@@ -23,12 +30,12 @@ const Form = () => {
   const [description, setDescription] = useState("");
 
   return (
-    <form
+    <form className="form"
       onSubmit={(e) => {
-        submit(e, { name, status, priority, description });
+        submit(e, { name, status, priority, description }, ps);
       }}
     >
-      <input
+      <input className="form-input"
         type="text"
         placeholder="Name"
         value={name}
@@ -60,7 +67,7 @@ const Form = () => {
         <option value="Medium">Medium</option>
         <option value="Low">Low</option>
       </select>
-      <input
+      <input className="form-input"
         type="text"
         placeholder="Description"
         value={description}
