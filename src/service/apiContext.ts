@@ -18,14 +18,18 @@ export default class {
     }
   };
 
-  static createMission = async (dto: CreateMissionDto): Promise<string> => {
+  static createMission = async (dto: CreateMissionDto): Promise<Mission> => {
     try {
       const res = await fetch(this.baseUrl + this.missionsRoute + this.apikey, {
         method: "post",
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(dto),
       });
-      if (res.status > 299) throw new Error("status code error");
-      return String(res.body)
+      if (!res.ok) throw new Error("status code error");
+      if (!res.body) throw new Error("return null");
+      return await res.json() as Mission
     } catch (err) {
       const error = err as Error;
       throw error;

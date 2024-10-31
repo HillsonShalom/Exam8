@@ -1,6 +1,6 @@
 export interface CreateMissionDto {
     name: string;
     status: 'Pending' | 'In Progress' | 'Completed';
-    priority: string;
+    priority: 'High' | 'Medium' | 'Low';
     description: string;
 }
